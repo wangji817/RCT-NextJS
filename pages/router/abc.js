@@ -2,18 +2,36 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.css'
 
-export default function Abc() {
+// export async function getStaticProps() {
+//     const res = await fetch('http://localhost:3000/api/name')
+//     const data = await res.json()
+//     return {
+//         props: {
+//             data,
+//         },
+//     }
+// }
+export async function getServerSideProps() {
+    const res = await fetch('http://localhost:3000/api/pageData')
+    const pageData = await res.json()
+    return { props: pageData }
+}
+
+export default function Abc({ pageData }) {
     const router = useRouter()
-    const { aaa } = router.query
-    
+    const { age } = router.query
+
     return (
         <div className={styles.container}>
             <Head>
-                <title>啊啊啊啊</title>
+                <title>{`${pageData?.name}'s page`}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
-            {`${JSON.stringify(aaa)}`}
+                {`${pageData?.name} age is ${age}`}
+            </div>
+            <div>
+                {JSON.stringify(pageData)}
             </div>
         </div>
     )
