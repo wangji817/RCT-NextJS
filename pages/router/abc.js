@@ -2,23 +2,23 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Home.module.css'
 
-// export async function getStaticProps() {
-//     const res = await fetch('http://localhost:3000/api/name')
-//     const data = await res.json()
-//     return {
-//         props: {
-//             data,
-//         },
-//     }
-// }
-export async function getServerSideProps() {
+//设置客户端获取数据设置props对象
+export async function getStaticProps() {
     const res = await fetch('http://localhost:3000/api/pageData')
     const pageData = await res.json()
     return { props: pageData }
 }
 
+//设置服务端获取数据设置props对象
+// export async function getServerSideProps() {
+//     const res = await fetch('http://localhost:3000/api/pageData')
+//     const pageData = await res.json()
+//     return { props: pageData }
+// }
+
+
 export default function Abc({ pageData }) {
-    const router = useRouter()
+    const router = useRouter()  
     const { age } = router.query
 
     return (
