@@ -1,7 +1,7 @@
 export default function name(req, res) {
     res.status(200).json({
         pageData: {
-            name: "陈杭彬",
+            name: "啊啊啊",
             bookList: [
                 {
                     "bookShowName": "绝色总裁的超级兵王",
